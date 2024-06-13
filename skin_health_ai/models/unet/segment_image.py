@@ -31,6 +31,21 @@ def predict(model, image):
     return prediction
 
 
+def overlay_mask_on_image(image, mask, alpha=0.5):
+    mask = (mask * 255).astype(np.uint8)
+    mask = Image.fromarray(mask)
+    mask = mask.convert("L")
+
+    image = Image.fromarray((image * 255).astype(np.uint8))
+    image = image.convert("RGBA")
+
+    overlay = Image.new("RGBA", image.size, (255, 0, 0, 0))
+    overlay.paste((255, 0, 0, int(255 * alpha)), (0, 0), mask)
+
+    combined = Image.alpha_composite(image, overlay)
+    return combined.convert("RGB")
+
+
 def segment_and_plot(image_path, model_path):
     model = load_model(model_path)
     model.to(device)
@@ -41,21 +56,20 @@ def segment_and_plot(image_path, model_path):
     image = image.squeeze().permute(1, 2, 0).numpy()
     prediction = prediction.squeeze().numpy()
 
-    pred_image = (prediction * 255).astype(np.uint8)
-    pred_image = Image.fromarray(pred_image)
+    combined_image = overlay_mask_on_image(image, prediction)
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
     axes[0].imshow(image)
     axes[0].set_title("Original Image")
     axes[0].axis("off")
 
-    axes[1].imshow(pred_image, cmap="gray")
+    axes[1].imshow(combined_image)
     axes[1].set_title("Segmented Image")
     axes[1].axis("off")
 
     plt.show()
 
-    ImageShow.show(pred_image)
+    ImageShow.show(combined_image)
 
 
 if __name__ == "__main__":
