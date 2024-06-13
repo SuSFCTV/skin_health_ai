@@ -1,6 +1,7 @@
 import torch
 from torch import optim
 
+from skin_health_ai.config import EXTERNAL_DATA_DIR
 from skin_health_ai.dataset import get_dataloaders
 from skin_health_ai.metrics.iou import iou_pytorch
 from skin_health_ai.models.train_utils.train import train
@@ -9,9 +10,7 @@ from skin_health_ai.models.unet.unet_transposed import UNetTranspose
 
 
 def main():
-    data_tr, data_val, data_ts = get_dataloaders(
-        root_dir="/home/sus/PycharmProjects/junior_contest_1/skin_health_ai/data/external/PH2Dataset", batch_size=8
-    )
+    data_tr, data_val, data_ts = get_dataloaders(root_dir=EXTERNAL_DATA_DIR / "PH2Dataset", batch_size=8)
 
     model = UNetTranspose()
     optimizer = optim.Adam(model.parameters(), lr=1e-4, weight_decay=0.00001)
