@@ -30,7 +30,9 @@ def transform_image(image: Image.Image):
 
 
 async def start(update: Update, context: CallbackContext) -> None:
-    await update.message.reply_text("Привет! Отправьте мне изображение, и я выполню его сегментацию.")
+    await update.message.reply_text(
+        "Привет! SkinHealthAI - это вспомогательный софт для телемедицины и врачей и не предназначен для использования обычными людьми. Отправьте мне изображение, и я выполню его сегментацию."
+    )
 
 
 async def handle_image(update: Update, context: CallbackContext) -> None:
