@@ -29,16 +29,18 @@ Searching for skin lesions
 │
 ├── setup.cfg          <- Configuration file for flake8
 │
-└── skin_health_ai                <- Source code for use in this project.
+├── telegram_bot       <- Source code for telegram bot for using ml models
+│
+└── skin_health_ai     <- Source code for use in this project.
     │
     ├── __init__.py    <- Makes skin_health_ai a Python module
     │
     │
     ├── models         <- Scripts to train models and then use trained models to make
     │   │                 predictions
-    │   ├── train_utils - utils for training (train_loop, losses, etc)
-    │   ├── segnet - segnet model
-    │   └── unet - unet model
+    │   ├── train_utils    <- utils for training (train_loop, losses, etc)
+    │   ├── segnet         <- segnet model
+    │   └── unet           <- unet model
     │
     └── metrics  <- Scripts for getting metrics
         └── iou.py
