@@ -23,6 +23,8 @@ Searching for skin lesions
 ├── pyproject.toml     <- Project configuration file with package metadata for skin_health_ai
 │                         and configuration for tools like black
 │
+├── .pre-commit-config <- Config for git hook - scripts are useful for identifying simple issues before submission to code review
+│
 │
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
